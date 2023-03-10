@@ -8,11 +8,11 @@
 
 
 <h1>CRUD com MySQL através de um pacote</h1>
-<p>Foi criado um pacote para conexão "ConexaoDB" e o seu arquivo "Conetcar.java"</p>
+<p>Foi criado um pacote para conexão "<b>ConexaoDB</b>" e o seu arquivo "<b>Conetcar.java</b>"</p>
 <img src="https://github.com/lucasrm1981/CRUD_JAVA_MySQL_com_pacote_conexao/blob/main/caminho.png"> 
 <p>com banco de dados e a sua inclusão na classe main Criação de um crud MySQL utilizando o NetBeans e a biblioteca de conexão do mysql " mysql-connector ", operações efetuadas pelo console e 
 utilizando a classe scanner.</p>
-<p>Foram utiilzadas os métodos separados para cada etapa.</p>
+<p>Foram utiilzadas os métodos separados para cada etapa baseada no banco com nome " <b>usuario.sql</b> ".</p>
 
 
 <p>Site do conector MySQL
