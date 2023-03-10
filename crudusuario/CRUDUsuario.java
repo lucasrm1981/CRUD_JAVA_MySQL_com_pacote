@@ -7,7 +7,6 @@ package crudusuario;
 // Bibliotecas Importadas para as leituras e tratamenos com SQL
 import conexaoDB.Conectar;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -79,11 +78,14 @@ Connection conn = Conectar.conectar();
                 /* Impressão da menssagem */
                 conn.close();
                 /* encerramento da conexão */
+            } else{
+                System.out.print("\nErro ao Inserir!\n");
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        
 
     }
       /* Função estática atualizarUsuario com passagem dos parametros pela função que serão inseridos pelo Scanner atrvés do useer_id informado  */
@@ -105,6 +107,8 @@ Connection conn = Conectar.conectar();
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Atualizado com Sucesso!");
+            } else{
+                System.out.print("\nErro ao Atualizar!\n");
             }
 
         } catch (SQLException ex) {
@@ -126,10 +130,13 @@ Connection conn = Conectar.conectar();
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Usuario Deletado!");
+            } else{
+                System.out.print("\nErro ao Deletar!\n");
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
+            System.out.print(ex);
         }
     }
 
@@ -143,60 +150,52 @@ Connection conn = Conectar.conectar();
         /* Exibição do menu de opções */
         System.out.println("\nDigite a opcao desejada:\n 1)Listar Usuarios. \n 2)Inserir Usuario\n 3)Deletar Usuario \n 4)Atualizar Usuario\n 0)para SAIR\n");
         opcao = input.nextInt();
-        while(opcao!=0){
-        /* SE a opção seja 1 irá executar a função listarUsuario */
-        if (opcao == 1) {
-            listarUsuario();
-        } else if (opcao == 2) {
-            /* SE opção for 2 irá solicitar os dados para inserir as informações pelo Scanner */
-            System.out.println("\nDigite seu login:\n");
-            username = input.next();
-
-            System.out.print("\nDigite sua senha:\n");
-            password = input.next();
-
-            System.out.print("\nDigite seu Nome Completo\n");
-            fullname = input.next();
-
-            System.out.print("\nDigite seu e-mail\n");
-            email = input.next();
-
-            inserirUsuario(username, password, fullname, email);
-            listarUsuario();
-            /* Após a inserção irá executar a listarUsuario */
-        } else if (opcao == 3) {
-            System.out.print("\nDigite o ID do usario que deseja deletar");
-            user_id = input.nextInt();
-
-            deletarUsuario(user_id);
-            listarUsuario();/* Após a inserção irá executar a listarUsuario */
-        /* SE a opção for 4 irá solicitar o ID do usuário que deseja alterar */
-        } else if (opcao == 4) {
-
-            System.out.print("\nDigite ID do usuario:\n");
-            /* Preenchimento do ID do usuário */
-            user_id = input.nextInt();
-
-            System.out.print("\nDigite seu login:\n");
-            username = input.next();
-
-            System.out.print("\nDigite sua senha:\n");
-            password = input.next();
-
-            System.out.print("\nDigite seu Nome Completo\n");
-            fullname = input.next();
-
-            System.out.print("\nDigite seu e-mail\n");
-            email = input.next();
-
-            atualizarUsuario(user_id, username, password, fullname, email);
-            listarUsuario();
-        }
+       
+            /* SE a opção seja 1 irá executar a função listarUsuario */
+            switch (opcao) {
+                case 1 -> listarUsuario();
+                case 2 -> {
+                    /* SE opção for 2 irá solicitar os dados para inserir as informações pelo Scanner */
+                    System.out.println("\nDigite seu login:\n");
+                    username = input.next();
+                    System.out.print("\nDigite sua senha:\n");
+                    password = input.next();
+                    System.out.print("\nDigite seu Nome Completo\n");
+                    fullname = input.next();
+                    System.out.print("\nDigite seu e-mail\n");
+                    email = input.next();
+                    inserirUsuario(username, password, fullname, email);
+                    listarUsuario();
+                /* Após a inserção irá executar a listarUsuario */
+            }
+                case 3 -> {
+                    System.out.print("\nDigite o ID do usario que deseja deletar:\n");
+                    user_id = input.nextInt();
+                    deletarUsuario(user_id);
+                    listarUsuario(); /* Após a inserção irá executar a listarUsuario */
+                /* SE a opção for 4 irá solicitar o ID do usuário que deseja alterar */
+            }
+                case 4 -> {
+                    System.out.print("\nDigite ID do usuario:\n");
+                    /* Preenchimento do ID do usuário */
+                    user_id = input.nextInt();
+                    System.out.print("\nDigite seu login:\n");
+                    username = input.next();
+                    System.out.print("\nDigite sua senha:\n");
+                    password = input.next();
+                    System.out.print("\nDigite seu Nome Completo\n");
+                    fullname = input.next();
+                    System.out.print("\nDigite seu e-mail\n");
+                    email = input.next();
+                    atualizarUsuario(user_id, username, password, fullname, email);
+                    listarUsuario();
+            }
+                case 0-> {
+                    break;
+                }
+                default -> System.out.println("\nDigite a opcao desejada:\n 1)Listar Usuarios. \n 2)Inserir Usuario\n 3)Deletar Usuario \n 4)Atualizar Usuario\n 0)para SAIR\n");
+            }
          /* Exibição do menu de opções */
-        System.out.println("\nDigite a opcao desejada:\n 1)Listar Usuarios. \n 2)Inserir Usuario\n 3)Deletar Usuario \n 4)Atualizar Usuario\n 0)para SAIR\n");
-        opcao = input.nextInt();
-
-    }
     }
     
 }

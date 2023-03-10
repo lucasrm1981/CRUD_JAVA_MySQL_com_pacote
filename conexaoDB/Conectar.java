@@ -16,8 +16,8 @@ public class Conectar {
     public static java.sql.Connection conectar() {
 
         try {
-            String dbURL = "jdbc:mysql://localhost:3306/dbusuario";
             /* Endereço, Porta e Nome da base de Dados */
+            String dbURL = "jdbc:mysql://localhost:3306/dbusuario";            
             String dbUsername = "root";/* Usuário */
             String dbPassword = "";/* Senha */
 
